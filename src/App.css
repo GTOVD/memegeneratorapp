@@ -51,6 +51,10 @@ header {
   padding: 20px;
 }
 
+main {
+  padding: 36px;
+}
+
 .header--image {
   height: 100%;
   margin-right: 6px;
@@ -64,4 +68,32 @@ header {
 .header--project {
   font-size: 12px;
   font-weight: 500;
+}
+
+.form {
+  display: grid;
+  grid-template: 40px 40px / 1fr 1fr;
+  gap: 17px;
+}
+.form--input {
+  border-radius: 5px;
+  font-family: "Karla", sans-serif;
+  border: 1px solid #d5d4d8;
+  text-indent: 5px;
+}
+.form--button {
+  grid-column: 1 / -1;
+  border-radius: 5px;
+  font-family: "Karla", sans-serif;
+  background: linear-gradient(90.41deg, #711f8d 1.14%, #a818da 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.meme--image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  padding-top: 50px;
 }
