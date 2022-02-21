@@ -7,6 +7,15 @@ export default function Meme () {
         bottomText: "Bottom Text",
         randomImage: "./ShutUpAndTakeMyMoney.jpg"
     })
+    function handleChange(event){
+        const {name, value, type, checked} = event.target
+        setMeme(prevMeme => { 
+            return {
+                ...prevMeme,
+                [name]: type === "checkbox" ? checked : value
+            }
+        })
+    }
     const [allMemeImage, setAllMemeImage] = React.useState({memesData})
     function handleClick(){
         const memesArray = allMemeImage.memesData.data.memes
@@ -17,24 +26,40 @@ export default function Meme () {
             randomImage: url
         }))
     }
+    function handleSubmit(event){
+        event.preventDefault()
+        console.log(meme)
+    }
     return (
         <main>
-            <div className="form">
-                <input 
-                    type="text"
-                    placeholder="Top Text"
-                    className="form--input"
-                />
-                <input 
-                    type="text"
-                    placeholder="Bottom Text"
-                    className="form--input"
-                />
-                <button className="form--button" onClick={handleClick}>Get a new meme image</button>
-            </div>
+            <form onSubmit={handleSubmit}>
+                <div className="form">
+                    <input 
+                        type="text"
+                        placeholder="Top Text"
+                        className="form--input"
+                        onChange={handleChange}
+                        name="topText"
+                        value={meme.topText}
+                    />
+                    <input 
+                        type="text"
+                        placeholder="Bottom Text"
+                        className="form--input"
+                        onChange={handleChange}
+                        name="bottomText"
+                        value={meme.bottomText}
+                    />
+                    <button className="form--button" onClick={handleClick}>Get a new meme image</button>
+                </div>
+            </form>
+
             <div className="meme-div" >
-             <img src={meme.randomImage} alt="Meme" className="meme--image" />
+                <img src={meme.randomImage} alt="Meme" className="meme--image" />
+                <h2 className="meme-topText text">{meme.topText}</h2>
+                <h2 className="meme-bottomText text">{meme.bottomText}</h2>
             </div>
+
         </main>
     )
 }

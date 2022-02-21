@@ -74,6 +74,7 @@ main {
   display: grid;
   grid-template: 40px 40px / 1fr 1fr;
   gap: 17px;
+  padding: 20px;
 }
 .form--input {
   border-radius: 5px;
@@ -91,9 +92,43 @@ main {
   cursor: pointer;
 }
 
+.meme-div {
+  position: relative;
+
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  color: rgb(0, 0, 0);
+  overflow: hidden;
+  border: 5px solid black;
+}
+
 .meme--image {
   height: 100%;
   width: 100%;
+  z-index: 1;
   object-fit: cover;
-  padding-top: 50px;
+}
+
+.meme-topText {
+  position: absolute;
+  z-index: 999;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 2%;
+  text-align: center;
+  width: 60%;
+  font-size: 60px;
+}
+.meme-bottomText {
+  position: absolute;
+  z-index: 999;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 80%;
+  text-align: center;
+  width: 60%;
+  font-size: 60px;
 }
