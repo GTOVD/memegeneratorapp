@@ -1,5 +1,4 @@
 import React from 'react';
-import memesData from './memeData.json';
 
 export default function Meme () {
     const [meme, setMeme] = React.useState({
@@ -7,6 +6,7 @@ export default function Meme () {
         bottomText: "Bottom Text",
         randomImage: "./ShutUpAndTakeMyMoney.jpg"
     })
+    const [allMemes, setAllMemes] = React.useState([])
     function handleChange(event){
         const {name, value, type, checked} = event.target
         setMeme(prevMeme => { 
@@ -16,11 +16,9 @@ export default function Meme () {
             }
         })
     }
-    const [allMemeImage, setAllMemeImage] = React.useState({memesData})
     function handleClick(){
-        const memesArray = allMemeImage.memesData.data.memes
-        const randomNumber = Math.floor(Math.random() * memesArray.length)
-        const url = memesArray[randomNumber].url
+        const randomNumber = Math.floor(Math.random() * allMemes.length)
+        const url = allMemes[randomNumber].url
         setMeme(prevState => ({
             ...prevState,
             randomImage: url
@@ -28,8 +26,12 @@ export default function Meme () {
     }
     function handleSubmit(event){
         event.preventDefault()
-        console.log(meme)
     }
+    React.useEffect(()=> { 
+        fetch("https://api.imgflip.com/get_memes")
+            .then(res => res.json())
+            .then(data=> setAllMemes(data.data.memes))
+    },[])
     return (
         <main>
             <form onSubmit={handleSubmit}>
@@ -53,13 +55,11 @@ export default function Meme () {
                     <button className="form--button" onClick={handleClick}>Get a new meme image</button>
                 </div>
             </form>
-
             <div className="meme-div" >
                 <img src={meme.randomImage} alt="Meme" className="meme--image" />
                 <h2 className="meme-topText text">{meme.topText}</h2>
                 <h2 className="meme-bottomText text">{meme.bottomText}</h2>
             </div>
-
         </main>
     )
 }
